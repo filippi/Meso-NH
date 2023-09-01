@@ -50,7 +50,7 @@ REF="refs/heads/MNH-56-branch"
 WORKDIR=${PHYEXWORKDIR:=${HOME}/MNHTESTING}
 update=0
 compil=1
-execute=0
+execute=1
 comp=0
 remove=0
 commit=""
@@ -299,7 +299,7 @@ if [ ${force} -eq 1 -o $(get_statuses "${SHA}" | grep "${context}" | wc -l) -eq 
     else
       compilation='-c'
       execution='-r'
-      jsonfile="src/${model}/${model}_version.json"
+      jsonfile="MY_RUN/CI/${model}_version.json"
       docmp=1
     fi
 
@@ -346,6 +346,7 @@ if [ ${force} -eq 1 -o $(get_statuses "${SHA}" | grep "${context}" | wc -l) -eq 
         result=0
         if [ ${execute} -eq 1 ]; then
           execcmd="$cmd ${execution} ${casearg}"
+          #execcmd="$cmd ${execution} -t "ALL""
           log 1 "Excution with ${execcmd}"
           set +e
           ${execcmd}

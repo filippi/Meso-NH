@@ -9,9 +9,8 @@ set -o pipefail #abort if left command on a pipe fails
 # TARGZDIR: directory where tar.gz files are searched for
 # MNHPACK: directory where tests are build
 
-availTests="007_16janvier/008_run2, 007_16janvier/008_run2_turb3D, 007_16janvier/008_run2_lredf, COLD_BUBBLE/002_mesonh, 
-            ARMLES/RUN, COLD_BUBBLE_3D/002_mesonh,OCEAN_LES/004_run2,014_LIMA/002_mesonh"
-defaultTest="007_16janvier/008_run2"
+availTests="001_2Drelief, 002_3Drelief, 003_KW78, 004_Reunion, 005_ARM, 007_16janvier, 009_ICARTT, 011_KW78CHEM, 012_dust, 014_LIMA"
+defaultTest="007_16janvier"
 separator='_' #- be carrefull, gmkpack (at least on belenos) has multiple allergies (':', '.', '@')
               #- seprator must be in sync with prep_code.sh separator
 
@@ -255,9 +254,8 @@ if [ $run -ge 1 ]; then
     set +e #file ends with a test that can return false
     [ $compilation -eq 0 ] && . $MNHPACK/$name/conf/profile_mesonh-*
     set -e
-    ./clean_mesonh_xyz
     set +o pipefail #We want to go through all tests
-    ./run_mesonh_xyz | tee Output_run
+    make | tee Output_run
     set -o pipefail
   done
 fi

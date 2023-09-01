@@ -1,13 +1,15 @@
 {
 "refversion":"MNH-V5-6-0",
 "testing": {
-            "007_16janvier/008_run2":"48b3138",
-            "007_16janvier/008_run2_turb3D":"48b3138",
-            "007_16janvier/008_run2_lredf":"48b3138",
-            "COLD_BUBBLE/002_mesonh":"48b3138",
-            "ARMLES/RUN":"48b3138",
-            "COLD_BUBBLE_3D/002_mesonh":"48b3138",
-            "OCEAN_LES/004_run2":"48b3138",
-            "014_LIMA/002_mesonh":"48b3138"
+            "001_2Drelief":"48b3138",
+            "002_3Drelief":"48b3138",
+            "003_KW78":"48b3138",
+            "004_Reunion":"48b3138",
+            "005_ARM":"48b3138",
+            "007_16janvier":"48b3138",
+            "009_ICARTT":"48b3138",
+            "011_KW78CHEM":"48b3138",
+            "012_dust":"48b3138",
+            "014_LIMA":"48b3138"
            }
 }
