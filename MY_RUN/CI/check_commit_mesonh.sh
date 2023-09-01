@@ -85,7 +85,7 @@ done
 
 [ "$reference" == 'REF' ] && reference="" #Compatibility with check_commit_arome.sh
 
-MNHPACK=$HOME/packsMNH
+MNHPACK=$HOME/MNHTESTING/MesoNH
 REFDIR=$HOME/REF
 TARGZDIR=$HOME
 if [ -z "${tests-}" ]; then

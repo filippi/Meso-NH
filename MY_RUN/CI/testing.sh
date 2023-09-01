@@ -55,7 +55,7 @@ comp=0
 remove=0
 commit=""
 SHA=0
-force=0.
+force=0
 models="mesonh"
 enableghpages=1
 
