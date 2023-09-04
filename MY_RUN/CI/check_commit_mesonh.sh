@@ -214,48 +214,17 @@ if [ $run -ge 1 ]; then
     echo "Pack does not exist ($MNHPACK/$name) or compilation has failed, please check"
     exit 6
   fi
-
+  export POSTRUN=echo
   for t in $(echo $tests | sed 's/,/ /g'); do
     case=$(echo $t | cut -d / -f 1)
     exedir=$(echo $t | cut -d / -f 2)
-    if [ $run_in_ref -eq 1 ]; then
-      cd $REFDIR/${refversion}/MY_RUN/KTEST/$case/
-      [ ! -d ${exedir}_$commit ] && cp -R ${exedir} ${exedir}_$commit
-      cd $REFDIR/${refversion}/MY_RUN/KTEST/$case/${exedir}_$commit
-    else
-      #If the test case didn't exist in the tar.gz, we copy it from from the reference version
-      rep=$MNHPACK/$name/MY_RUN/KTEST/$case
-      [ ! -d $rep ] && cp -r $REFDIR/${refversion}/MY_RUN/KTEST/$case $rep
-      cd $rep
-
-      #Loop on the directories
-      for rep in *; do
-        if [[ -d "$rep" || ( -L "$rep" && ! -e "$rep" ) ]]; then #directory (or a link to a directory) or a broken link
-          if echo $availTests | grep ${case}/$rep > /dev/null; then
-            #This directory is a test case
-            if [ $rep == ${exedir} ]; then
-              #this is the case we want to run
-              rm -rf $rep
-              cp -r $REFDIR/${refversion}/MY_RUN/KTEST/$case/$rep .
-            fi
-          else
-            #This directory might be neede to run the test case, we take the reference version
-            rm -rf $rep
-            ln -s $REFDIR/${refversion}/MY_RUN/KTEST/$case/$rep 
-          fi
-        fi
-      done
-
-      #In case subcase does not exist we create it
-      [ ! -d ${exedir} ] && cp -r $REFDIR/${refversion}/MY_RUN/KTEST/$case/${exedir} .
-      cd ${exedir}
-    fi
-
+    rep=$MNHPACK/$name/MY_RUN/KTEST/$case
+    cd $rep
     set +e #file ends with a test that can return false
     [ $compilation -eq 0 ] && . $MNHPACK/$name/conf/profile_mesonh-*
     set -e
     set +o pipefail #We want to go through all tests
-    make | tee Output_run
+    yes | make | tee Output_run
     set -o pipefail
   done
 fi
